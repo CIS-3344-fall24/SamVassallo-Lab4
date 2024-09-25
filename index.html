@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+    <script src="conversion.js" defer></script>
+</head>
+<body>
+    <h4>Change the button text</h4>
+    <p id="message">Click the button to change this text.</p>
+    <button onclick="changetxt()">Change Text</button>
+
+    <h4>Print info from the form</h4>
+    <form onsubmit="change(); return false;">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        <br><br>
+        <label for="age">Age:</label>
+        <input type="number" id="age" required>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="result"></div>
+
+    <h4>Variable Stuff</h4>
+    <div id="output"></div>
+
+    <h4>Compare Strings</h4>
+    <div id="StringComp"></div>
+    
+    <h4>Assignment Operators</h4>
+    <div id="ops"></div>
+
+    <h4>Temperature Conversion</h4>
+    <div id="c2f"></div>
+    
+    <h4>Fahrenheit to Celsius</h4>
+    <input type="number" id="fahrenheitInput" placeholder="Enter Fahrenheit">
+    <button onclick="convertFtoC()">Convert to Celsius</button>
+    <p id="f2c"></p>
+
+    <script>
+        function changetxt() {
+            document.getElementById('message').textContent = 'Hello, DOM Manipulation!';
+        }
+        
+        function change() {
+            let name = document.getElementById('name').value;
+            let age = document.getElementById('age').value;
+            document.getElementById('result').textContent = `Hello, ${name}! You are ${age} years old!`;
+        }
+
+        // Variable declarations
+        const myString = "Hello, World!";
+        const myNumber = 42;
+        const myBoolean = true;
+        const myNull = null;
+        const myUndefined = undefined;
+        const myBigInt = 123456789012345678901234567890n;
+
+  
+        const outputDiv = document.getElementById('output');
+        outputDiv.innerHTML += `String: ${myString} (Type: ${typeof myString})<br>`;
+        outputDiv.innerHTML += `Number: ${myNumber} (Type: ${typeof myNumber})<br>`;
+        outputDiv.innerHTML += `Boolean: ${myBoolean} (Type: ${typeof myBoolean})<br>`;
+        outputDiv.innerHTML += `Null: ${myNull} (Type: ${typeof myNull})<br>`;
+        outputDiv.innerHTML += `Undefined: ${myUndefined} (Type: ${typeof myUndefined})<br>`;
+        outputDiv.innerHTML += `BigInt: ${myBigInt} (Type: ${typeof myBigInt})<br>`;
+
+        function compareStrings(string1, string2) {
+            if (string1 === string2) {
+                return `${string1} is equal to ${string2}`;
+            } else if (string1 > string2) {
+                return `${string1} is larger than ${string2}`;
+            } else {
+                return `${string1} is less than ${string2}`;
+            }
+        }
+
+        function showStrings() {
+            const results = [];
+            results.push(compareStrings("apple", "orange"));
+            results.push(compareStrings("dog", "dog"));
+            results.push(compareStrings("banana", "Banana"));
+            results.push(compareStrings("", "hello"));
+            results.push(compareStrings("", ""));
+            results.push(compareStrings("@home", "@work"));
+            results.push(compareStrings("hello!", "hello"));
+            results.push(compareStrings("good$", "good"));
+            results.push(compareStrings("123", "124"));
+            results.push(compareStrings("99", "100"));
+            results.push(compareStrings(" space", "space"));
+            results.push(compareStrings("hello ", "hello"));
+            results.push(compareStrings("JavaScript", "javascript"));
+            results.push(compareStrings("Hello", "HELLO"));
+            results.push(compareStrings("hello.", "hello!"));
+            results.push(compareStrings("test123", "test_123"));
+
+            
+            document.getElementById('StringComp').innerHTML = results.join('<br>');
+        }
+
+        showStrings(); // Call the function to show string comparisons
+
+        function mathOperators(){
+            let x = 100;
+            const mathResults = document.getElementById('ops');
+            mathResults.innerHTML = "Assignment Operator Results:";
+
+            x += 50;
+            mathResults.innerHTML += `x + 50 = ${x}<br>`;
+
+            x -= 30;
+            mathResults.innerHTML += `x - 30 = ${x}<br>`;
+
+            x *= 2;
+            mathResults.innerHTML += `x * 2 = ${x}<br>`;
+
+            x /= 5;
+            mathResults.innerHTML += `x / 5= ${x}<br>`;
+
+            x %= 7;
+            mathResults.innerHTML += `x % 7 = ${x}<br>`;
+        }
+
+        mathOperators();
+
+        function cToF(celsius) {
+            const fahrenheit = (celsius * 9/5) + 32;
+            document.getElementById("c2f").innerHTML = "Celsius to Fahrenheit: " + fahrenheit.toFixed(2) + "°F";
+        }
+
+        // Call the function with an example value
+        cToF(25);
+
+        // Fahrenheit to Celsius conversion
+        function convertFtoC() {
+            const fahrenheit = parseFloat(document.getElementById('fahrenheitInput').value);
+            if (!isNaN(fahrenheit)) {
+                const celsius = (fahrenheit - 32) * 5/9;
+                document.getElementById('f2c').innerHTML = `Fahrenheit to Celsius: ${celsius.toFixed(2)}°C`;
+            } else {
+                document.getElementById('f2c').innerHTML = 'Please enter a valid number.';
+            }
+        }
+    </script>
+</body>
+</html>
